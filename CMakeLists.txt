@@ -39,6 +39,16 @@ endif()
 
 project(TNT C CXX ${EXTRA_LANGS})
 
+# The release version, from where build/common/bump-version.sh writes it.
+file(STRINGS ${CMAKE_CURRENT_SOURCE_DIR}/android/gradle.properties FILAMENT_VERSION
+        REGEX "^VERSION_NAME=" LIMIT_COUNT 1)
+string(REGEX MATCH "[0-9]+\\.[0-9]+\\.[0-9]+" FILAMENT_VERSION "${FILAMENT_VERSION}")
+if (NOT FILAMENT_VERSION)
+    message(FATAL_ERROR "No VERSION_NAME in android/gradle.properties")
+endif()
+set_property(DIRECTORY APPEND PROPERTY CMAKE_CONFIGURE_DEPENDS
+        ${CMAKE_CURRENT_SOURCE_DIR}/android/gradle.properties)
+
 # ==================================================================================================
 # Options
 # ==================================================================================================

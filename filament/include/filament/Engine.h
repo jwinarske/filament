@@ -1426,6 +1426,11 @@ public:
      */
     static uint64_t getSteadyClockTimeNano() noexcept;
 
+    /**
+     * Returns the version of Filament this library was built from, e.g. "1.78.0".
+     */
+    static const char* UTILS_NONNULL getVersion() noexcept;
+
 
     UTILS_NOAPIGEN
     DebugRegistry& getDebugRegistry() noexcept;
